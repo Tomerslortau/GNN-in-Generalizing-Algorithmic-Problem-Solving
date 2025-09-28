@@ -91,11 +91,7 @@ def load_eval_starts_for_N(N: int, cache_dir: Optional[str], num_starts: Optiona
         if num_starts is not None:
             lst = lst[:num_starts]
         return lst
-
-    # fallback: generate quickly
-    from .precompute_datasets import random_walk_samples  # local import
-    triples = random_walk_samples(env, count=num_starts or 1000, seed=seed, walk_min=0, walk_max=None)
-    return [{"state": s, "d_opt": int(d)} for (s, _, d) in triples]
+    raise RuntimeError(f"Did not pre-compute for N={N}")
 class CheckersPyGDataset(Dataset):
     """
     PyG dataset with one Data per state:

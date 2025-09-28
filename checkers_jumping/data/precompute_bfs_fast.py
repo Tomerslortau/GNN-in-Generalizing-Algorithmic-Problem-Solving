@@ -7,16 +7,12 @@ import torch
 import sys
 sys.path.insert(0, ".")
 from puzzles.checkers import CheckerJumpingEnv
-from data.dataset import Sample  # kept to match your imports; not used directly
 
 
 def ensure_dir(p: str):
     os.makedirs(p, exist_ok=True)
 
 
-# ───────────────────────────────────────────────────────────────
-# Helpers: tiny local caches for env methods (pure, per-process)
-# ───────────────────────────────────────────────────────────────
 class EnvCache:
     def __init__(self, env: CheckerJumpingEnv):
         self.env = env
@@ -47,10 +43,6 @@ class EnvCache:
         return m
 
 
-# ───────────────────────────────────────────────────────────────
-# 1) Forward BFS from init to enumerate the reachable graph
-#    and collect predecessor edges for reverse search
-# ───────────────────────────────────────────────────────────────
 def enumerate_graph_and_predecessors(
     env: CheckerJumpingEnv,
     limit: Optional[int] = None,
@@ -99,10 +91,7 @@ def enumerate_graph_and_predecessors(
     return states, preds, goals
 
 
-# ───────────────────────────────────────────────────────────────
-# 2) Reverse multi-source BFS from all goals to compute d_opt
-#    and the optimal first action per state.
-# ───────────────────────────────────────────────────────────────
+
 def reverse_multisource_bfs_labels(
     env: CheckerJumpingEnv,
     preds: Dict[Tuple[str, ...], List[Tuple[Tuple[str, ...], object]]],

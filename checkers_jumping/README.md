@@ -1,6 +1,6 @@
 To precompute eval and training states:
 
-python data/precompute_bfs_fast.py \                                                         
+python data/precompute_bfs_fast.py \                                  
   --N_min 1 --N_max 20 \
   --per_N 2000 \
   --eval_starts_per_N 2000 \
@@ -14,7 +14,7 @@ Precomputing states could take 10-20 minutes depending on the hardware.
 To run the experiment cd into the the checkers jumping directory
 run:
 
-python experiments/statewise_success_eval_gs.py \                                            
+python experiments/statewise_success_eval_gs.py \
   --N_train_low 3 --N_train_high 8 \
   --N_eval_low 9 --N_eval_high 18 \
   --per_N 1500 --epochs 40 --lr 2e-3 \
