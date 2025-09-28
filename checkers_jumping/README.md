@@ -1,6 +1,6 @@
 To precompute eval and training states:
 
-python data/precompute_dfs.py \                                                         
+python data/precompute_bfs_fast.py \                                                         
   --N_min 1 --N_max 20 \
   --per_N 2000 \
   --eval_starts_per_N 2000 \
